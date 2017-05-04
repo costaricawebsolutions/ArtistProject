@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#featured">Prodigious <span class="subhead">Candidate Test</span></a>
+            </div>
+            <!-- navbar-header -->
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/product/index">Home</a></li>                    
+                </ul>
+            </div>
+            <!-- collapse navbar-collapse -->
+        </div>
+        <!-- container -->
+    </nav>
+
+    <div class="content container">
+        <div class="row">
+            <section class="col-sm-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-tittle">NET Web Developer Technical Test</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>A.</strong> Create a RESTFul service using ASP.NET WebAPI that connects to a database and exposes 4 basic operations:</p>
+                        <ol>
+                            <li>Retrieve all records from a database table.</li>
+                            <li>Retrieve a single record from the same table, using its identifier.</li>
+                            <li>Insert a record to the table.</li>
+                            <li>Update the information of a record, using its identifier.</li>
+                        </ol>
+                        <p><strong>B.</strong> Create a Web application using ASP.NET MVC, that provides a user interface to consume the created API methods. Your application must not access the database directly, but it should make use of models that map against the data of the service. It should display at least the following interfaces:</p>
+                        <ol>
+                            <li>List all records.</li>
+                            <li>View the details of a single record</li>
+                            <li>Provide a form to insert a new record.</li>
+                            <li>Provide a form to update an existing record.</li>
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+
+                            @foreach (var product in ViewBag.listProducts)
+                            {
+                                <tr>
+                                    <td>@product.id</td>
+                                    <td>@product.name</td>
+                                    <td>@product.description</td>
+                                    <td>@product.category</td>
+                                    <td>@product.price</td>
+                                    <td>
+
+                                        
+
+
+                                        <a onclick="return confirm('Are you sure')" class="btn btn-danger" href="@Url.Action("Delete","Product",
+                new {id = product.id})">
+                                            <span class="glyphicon glyphicon glyphicon glyphicon-remove"></span> Delete
+                                        </a>
+
+
+
+
+                                        <a class="btn btn-warning" href="@Url.Action("Edit", "Product", new { id = product.id })">
+                                            <span class="glyphicon glyphicon glyphicon-pencil"></span> Edit
+                                        </a>
+
+
+                                        
+                                    </td>
+
+                                </tr>
+
+                            }
+
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        &raquo; <a href="@Url.Action("Create","Product")">Add new product</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+        
+
+
+
+</body>
+</html>

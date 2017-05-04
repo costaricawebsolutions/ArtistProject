@@ -1,0 +1,48 @@
+<div class="artistsearch">
+  <div class="card search">
+    <h1>Artist Directory</h1>
+    <!--<label *ngIf="name">Name: {{name}}</label><br />-->
+    <!--<label *ngIf="name" [innerHTML]="'Name: ' + name"></label><br />-->
+    <!--<label *ngIf="name" bind-innerHTML="'Name: ' + name"></label><br />-->
+    <label>search <span *ngIf="query"> for: {{query}}</span></label><br />
+      <input [(ngModel)]="query" placeholder="type in search term">
+      <!--
+    <input #newArtist [(ngModel)]="name"  placeholder="type in search term"        
+           (keyup.enter) ="addArtist(newArtist.value);newArtist.value=''"
+           (blur) ="addArtist(newArtist.value); newArtist.value=''">
+    -->
+<!--Este input hace lo mismo que el de arriba, solo que el de arriba le agregaron el ngModel
+      <input #newArtist
+             [value]="name"
+             (input)="name = $event.target.value"
+             (keyup.enter)="addArtist(newArtist.value);newArtist.value=''"
+             (blur)="addArtist(newArtist.value); newArtist.value=''">
+-->
+
+
+    <!--  <button class="btn" (click)="addArtist(newArtist.value)">Add</button>-->
+  </div>
+    
+</div>
+
+
+<ul *ngIf="query"  class="artistlist cf">
+    <!--<li  (click)="onClick(item.name)" class="artist cf" *ngFor="let item of artists">
+        <span class="content">{{item.name}}</span>
+    </li>
+    -->
+
+    <li (click)="showArtist(item); query='';" class="artist cf" *ngFor="let item of (artists) | find:query">
+       <!-- <img  src="images/{{item.shortname}}_tn.jpg" alt="{{item.name}} Photo" />
+        <div class="info">
+            <h2>{{item.name}}</h2>
+            <h3>{{item.reknown}}</h3>
+            <hr />
+        
+        </div>-->
+
+        <artist-item class="content" [artist]="item"></artist-item>
+    </li>
+</ul>
+
+<artist-details *ngIf="currentArtist" [artist]="currentArtist"></artist-details>
